@@ -142,37 +142,35 @@ def solve(N, p, constraints, timeout=60):
                 model.addConstr(w[box] <= ratio * h[box])
         elif constraint_type == "horizontal_align":
             align1, box1, align2, box2 = parse_match(constraint_type, constraint)
-            match align1:
-                case "top":
-                    equation1 = y[box1] + h[box1]
-                case "center":
-                    equation1 = y[box1] + h[box1] / 2
-                case "bottom":
-                    equation1 = y[box1] 
-            match align2:
-                case "top":
-                    equation2 = y[box2] + h[box2]
-                case "center":
-                    equation2 = y[box2] + h[box2] / 2
-                case "bottom":
-                    equation2 = y[box2]
+            if align1 == "top":
+                equation1 = y[box1] + h[box1]
+            elif align1 == "center":
+                equation1 = y[box1] + h[box1] / 2
+            elif align1 == "bottom":
+                equation1 = y[box1]
+
+            if align2 == "top":
+                equation2 = y[box2] + h[box2]
+            elif align2 == "center":
+                equation2 = y[box2] + h[box2] / 2
+            elif align2 == "bottom":
+                equation2 = y[box2]
             model.addConstr(equation1 == equation2)
         elif constraint_type == "vertical_align":
             align1, box1, align2, box2 = parse_match(constraint_type, constraint)
-            match align1:
-                case "left":
-                    equation1 = x[box1]
-                case "center":
-                    equation1 = x[box1] + w[box1] / 2
-                case "right":
-                    equation1 = x[box1] + w[box1]
-            match align2:
-                case "left":
-                    equation2 = x[box2]
-                case "center":
-                    equation2 = x[box2] + w[box2] / 2
-                case "right":
-                    equation2 = x[box2] + w[box2]
+            if align1 == "left":
+                equation1 = x[box1]
+            elif align1 == "center":
+                equation1 = x[box1] + w[box1] / 2
+            elif align1 == "right":
+                equation1 = x[box1] + w[box1]
+
+            if align2 == "left":
+                equation2 = x[box2]
+            elif align2 == "center":
+                equation2 = x[box2] + w[box2] / 2
+            elif align2 == "right":
+                equation2 = x[box2] + w[box2]
             model.addConstr(equation1 == equation2)
         elif constraint_type == "symmetry":
             box1, box2, axis, axis_value = parse_match(constraint_type, constraint)

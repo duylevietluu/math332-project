@@ -1,6 +1,6 @@
 # Floor Plan Application
 
-This application is solve the floor planning problem.
+This application solves the floor planning problem.
 
 ## Description
 
